@@ -1,5 +1,7 @@
 import * as core from "@actions/core";
 import { InputParameter } from "../types";
+import simpleGit, { SimpleGit } from "simple-git";
+import fs from "fs";
 
 /**
  * Retrieves input parameters for the action.
@@ -48,5 +50,42 @@ export const getInputParameter = (): InputParameter => {
       itemTemplate: "",
       outputFilePath: "",
     };
+  }
+};
+
+/**
+ * Writes markdown content to a file and commits it using Git.
+ * @param path - The path to the file where markdown content will be written.
+ * @param markdownContent - The markdown content to be written to the file.
+ */
+export const outputAndCommitMarkdown = (
+  path: string,
+  markdownContent: string
+) => {
+  try {
+    // Configure Git user
+    const git: SimpleGit = simpleGit();
+    git.addConfig(
+      "user.email",
+      "41898282+github-actions[bot]@users.noreply.github.com"
+    );
+    git.addConfig("user.name", "github-actions[bot]");
+
+    // Write markdown content to a file
+    fs.writeFileSync(path, markdownContent);
+
+    core.info(`Commiting: ${path}`);
+
+    // Commit the markdown file
+    git.add(path);
+    git.commit(`Update ${path}`, path, (error) => {
+      if (error) {
+        core.setFailed(`Error committing markdown file: ${error}`);
+      } else {
+        core.info("Markdown file committed successfully.");
+      }
+    });
+  } catch (error) {
+    core.setFailed(`Error committing markdown file: ${error}`);
   }
 };
