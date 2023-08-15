@@ -1,7 +1,7 @@
 import { getInputParameter, outputAndCommitMarkdown } from "./lib/action";
 import { getPrs } from "./lib/github";
 import { groupPRsByRepository } from "./lib/grouping";
-import { generateFullMarkdown } from "./lib/markdown";
+import { generateFullMarkdown, insert } from "./lib/markdown";
 import { Options, Status } from "./types";
 
 async function run() {
@@ -33,8 +33,8 @@ async function run() {
   // Generate markdown content based on the grouped PRs.
   const mdData = generateFullMarkdown(groupedPrs, repoTemplate, itemTemplate);
 
-  // Write markdown content to a file and commit it using Git.
-  outputAndCommitMarkdown(outputFilePath, mdData);
+  // Inserts markdown content between specified start and end comment markers in a template file.
+  await insert(outputFilePath, mdData);
 }
 
 void run();
