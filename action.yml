@@ -1,5 +1,5 @@
-name: "Action Template"
-description: ""
+name: "Action PR to Md"
+description: "Action to output a list of PRs to a Markdown file."
 author: "ryohidaka"
 inputs:
 runs:

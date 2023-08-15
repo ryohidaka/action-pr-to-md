@@ -1,10 +1,12 @@
-# action-template
+# Action PR to Md
+
+Action to output a list of PRs to a Markdown file.
 
 ## Usage
 
 ```yml
-- name: Action Name
-  uses: ryohidaka/action-template@v1
+- name: Action PR to Md
+  uses: ryohidaka/action-pr-to-md@v1
 ```
 
 ## Demo
