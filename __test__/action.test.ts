@@ -18,7 +18,7 @@ describe("getInputParameter", () => {
     (core.getInput as jest.Mock).mockReturnValueOnce("test-states");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-repo-template");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-item-template");
-    (core.getInput as jest.Mock).mockReturnValueOnce("test-output_file_path");
+    (core.getInput as jest.Mock).mockReturnValueOnce("test-output-file-path");
 
     const result = getInputParameter();
 
@@ -29,7 +29,7 @@ describe("getInputParameter", () => {
       states: ["test-states"],
       repoTemplate: "test-repo-template",
       itemTemplate: "test-item-template",
-      outputFilePath: "test-output_file_path",
+      outputFilePath: "test-output-file-path",
     });
 
     // Verify calls to core.getInput
