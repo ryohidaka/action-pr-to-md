@@ -1,3 +1,13 @@
+export type InputParameter = {
+  userName: string;
+  isExcludeOwnerRepos: boolean;
+  excludedRepos: string[];
+  states: string[];
+  repoTemplate: string;
+  itemTemplate: string;
+  outputFilePath: string;
+};
+
 // Define the possible status values for Pull Requests
 export type Status = "open" | "merged" | "closed";
 
