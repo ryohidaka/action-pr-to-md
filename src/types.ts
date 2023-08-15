@@ -8,3 +8,11 @@ export type Options = {
   excludedRepos?: string[]; // List of repositories to exclude from the query
   states?: Status[]; // List of PR states (open, merged, closed) to include in the query
 };
+
+export type Item = {
+  [key: string]: any;
+};
+
+export type RepositoryData = {
+  [repo: string]: Item[];
+};
