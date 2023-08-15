@@ -2,9 +2,30 @@ name: "Action PR to Md"
 description: "Action to output a list of PRs to a Markdown file."
 author: "ryohidaka"
 inputs:
+  user_name:
+    description: "The username to fetch pull requests"
+    required: true
+  is_exclude_owner_repos:
+    description: "Exclude repositories owned by the user"
+    default: false
+  excluded_repos:
+    description: "Comma-separated list of excluded repository names"
+    default: ""
+  states:
+    description: "Comma-separated list of PR states (open, merged, closed)"
+    default: ""
+  repo_template:
+    description: "Template for repository section"
+    default: '- {REPO}\\n{ITEMS}'
+  item_template:
+    description: "Template for individual item sections"
+    default: "  - {title} {number} {url}"
+  output_file_path:
+    description: "Path to the output markdown file"
+    default: "output.md"
 runs:
   using: "node16"
   main: "dist/index.js"
 branding:
   icon: "file-text"
-  color: "green"
+  color: "orange"
