@@ -14,6 +14,7 @@ describe("getInputParameter", () => {
     // Set up necessary test data
     (core.getInput as jest.Mock).mockReturnValueOnce("test-user-name");
     (core.getBooleanInput as jest.Mock).mockReturnValueOnce(true);
+    (core.getInput as jest.Mock).mockReturnValueOnce("test-included-repos");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-excluded-repos");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-states");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-repo-template");
@@ -25,6 +26,7 @@ describe("getInputParameter", () => {
     expect(result).toEqual({
       userName: "test-user-name",
       isExcludeOwnerRepos: true,
+      includedRepos: ["test-included-repos"],
       excludedRepos: ["test-excluded-repos"],
       states: ["test-states"],
       repoTemplate: "test-repo-template",
@@ -35,6 +37,7 @@ describe("getInputParameter", () => {
     // Verify calls to core.getInput
     expect(core.getInput).toHaveBeenCalledWith("user_name", { required: true });
     expect(core.getBooleanInput).toHaveBeenCalledWith("is_exclude_owner_repos");
+    expect(core.getInput).toHaveBeenCalledWith("included_repos");
     expect(core.getInput).toHaveBeenCalledWith("excluded_repos");
     expect(core.getInput).toHaveBeenCalledWith("states");
     expect(core.getInput).toHaveBeenCalledWith("repo_template");
@@ -54,6 +57,7 @@ describe("getInputParameter", () => {
     expect(result).toEqual({
       userName: "",
       isExcludeOwnerRepos: false,
+      includedRepos: [],
       excludedRepos: [],
       states: [],
       repoTemplate: "",

@@ -1,6 +1,7 @@
 export type InputParameter = {
   userName: string;
   isExcludeOwnerRepos: boolean;
+  includedRepos: string[];
   excludedRepos: string[];
   states: string[];
   repoTemplate: string;
@@ -15,6 +16,7 @@ export type Status = "open" | "merged" | "closed";
 export type Options = {
   userName: string; // The username of the PR author
   isExcludeOwnerRepos?: boolean; // Whether to exclude PRs from repositories owned by the user
+  includedRepos?: string[]; // List of repositories to include from the query
   excludedRepos?: string[]; // List of repositories to exclude from the query
   states?: Status[]; // List of PR states (open, merged, closed) to include in the query
 };

@@ -8,6 +8,9 @@ inputs:
   is_exclude_owner_repos:
     description: "Exclude repositories owned by the user"
     default: false
+  included_repos:
+    description: "Comma-separated list of included repository names"
+    default: ""
   excluded_repos:
     description: "Comma-separated list of excluded repository names"
     default: ""

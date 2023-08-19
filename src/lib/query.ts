@@ -8,6 +8,7 @@ import { Options } from "../types";
 export const getPrsQuery = (options: Options): string => {
   const userName = options.userName;
   const isExcludeOwnerRepos = options.isExcludeOwnerRepos;
+  const includedRepos = options.includedRepos;
   const excludedRepos = options.excludedRepos;
   const states = options.states;
 
@@ -17,6 +18,12 @@ export const getPrsQuery = (options: Options): string => {
   // If excluding owner's repositories, add exclusion
   if (isExcludeOwnerRepos) {
     query += ` -user:${userName}`;
+  }
+
+  // If included repositories are specified, add their exclusion
+  if (includedRepos && includedRepos.length > 0) {
+    const includedQuery = includedRepos.map((repo) => `repo:${repo}`).join(" ");
+    query += ` ${includedQuery}`;
   }
 
   // If excluded repositories are specified, add their exclusion

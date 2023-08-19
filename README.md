@@ -38,6 +38,10 @@ Action to output a list of PRs to a Markdown file.
 
 **Optional** Exclude repositories owned by the user.
 
+### `included_repos`
+
+**Optional** Comma-separated list of included repository names.
+
 ### `excluded_repos`
 
 **Optional** Comma-separated list of excluded repository names.

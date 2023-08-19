@@ -19,6 +19,12 @@ export const getInputParameter = (): InputParameter => {
     const isExcludeOwnerRepos =
       core.getBooleanInput("is_exclude_owner_repos") || false;
 
+    // List of included repository names
+    const includedReposRaw = core.getInput("included_repos") || "";
+    const includedRepos = includedReposRaw
+      .split(",")
+      .map((item) => item.trim());
+
     // List of excluded repository names
     const excludedReposRaw = core.getInput("excluded_repos") || "";
     const excludedRepos = excludedReposRaw
@@ -41,6 +47,7 @@ export const getInputParameter = (): InputParameter => {
     return {
       userName,
       isExcludeOwnerRepos,
+      includedRepos,
       excludedRepos,
       states,
       repoTemplate,
@@ -53,6 +60,7 @@ export const getInputParameter = (): InputParameter => {
     return {
       userName: "",
       isExcludeOwnerRepos: false,
+      includedRepos: [],
       excludedRepos: [],
       states: [],
       repoTemplate: "",
