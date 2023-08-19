@@ -17,6 +17,8 @@ describe("getInputParameter", () => {
     (core.getInput as jest.Mock).mockReturnValueOnce("test-included-repos");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-excluded-repos");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-states");
+    (core.getInput as jest.Mock).mockReturnValueOnce("test-since");
+    (core.getInput as jest.Mock).mockReturnValueOnce("test-until");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-repo-template");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-item-template");
     (core.getInput as jest.Mock).mockReturnValueOnce("test-output-file-path");
@@ -29,6 +31,8 @@ describe("getInputParameter", () => {
       includedRepos: ["test-included-repos"],
       excludedRepos: ["test-excluded-repos"],
       states: ["test-states"],
+      since: "test-since",
+      until: "test-until",
       repoTemplate: "test-repo-template",
       itemTemplate: "test-item-template",
       outputFilePath: "test-output-file-path",
@@ -40,6 +44,8 @@ describe("getInputParameter", () => {
     expect(core.getInput).toHaveBeenCalledWith("included_repos");
     expect(core.getInput).toHaveBeenCalledWith("excluded_repos");
     expect(core.getInput).toHaveBeenCalledWith("states");
+    expect(core.getInput).toHaveBeenCalledWith("since");
+    expect(core.getInput).toHaveBeenCalledWith("until");
     expect(core.getInput).toHaveBeenCalledWith("repo_template");
     expect(core.getInput).toHaveBeenCalledWith("item_template");
     expect(core.getInput).toHaveBeenCalledWith("output_file_path");
@@ -60,6 +66,8 @@ describe("getInputParameter", () => {
       includedRepos: [],
       excludedRepos: [],
       states: [],
+      since: "",
+      until: "",
       repoTemplate: "",
       itemTemplate: "",
       outputFilePath: "",

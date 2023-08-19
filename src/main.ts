@@ -1,4 +1,5 @@
-import { getInputParameter, outputAndCommitMarkdown } from "./lib/action";
+import { getInputParameter } from "./lib/action";
+import { filterDataByDateRange } from "./lib/filter";
 import { getPrs } from "./lib/github";
 import { groupPRsByRepository } from "./lib/grouping";
 import { generateFullMarkdown, insert } from "./lib/markdown";
@@ -11,6 +12,8 @@ async function run() {
     isExcludeOwnerRepos,
     excludedRepos,
     states,
+    since,
+    until,
     repoTemplate,
     itemTemplate,
     outputFilePath,
@@ -27,8 +30,11 @@ async function run() {
   // Fetch PRs based on the provided options.
   const prs = await getPrs(options);
 
+  // Filters prs by date range.
+  const filteredPrs = filterDataByDateRange(prs, since, until);
+
   // Group fetched PRs by repository.
-  const groupedPrs = groupPRsByRepository(prs);
+  const groupedPrs = groupPRsByRepository(filteredPrs);
 
   // Generate markdown content based on the grouped PRs.
   const mdData = generateFullMarkdown(groupedPrs, repoTemplate, itemTemplate);

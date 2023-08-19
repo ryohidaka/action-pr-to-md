@@ -23,6 +23,8 @@ Action to output a list of PRs to a Markdown file.
     is_exclude_owner_repos: false
     states: "open, merged, closed"
     excluded_repos: "excluded_repo1, excluded_repo2"
+    since: "2020-01-01"
+    until: "2023-01-01"
     repo_template: "- {REPO}\n{ITEMS}"
     item_template: "\t- [#{number} {title}]({url})"
     output_file_path: "output.md"
@@ -49,6 +51,14 @@ Action to output a list of PRs to a Markdown file.
 ### `states`
 
 **Optional** Comma-separated list of PR states (`open, merged, closed`).
+
+### `since`
+
+**Optional** Filters data after to the specified date. (ex.`2020-01-01`).
+
+### `until`
+
+**Optional** Filters data prior to the specified date. (ex.`2020-01-01`).
 
 ### `repo_template`
 

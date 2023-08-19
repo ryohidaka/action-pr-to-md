@@ -35,6 +35,10 @@ export const getInputParameter = (): InputParameter => {
     const statesRaw = core.getInput("states") || "";
     const states = statesRaw.split(",").map((item) => item.trim());
 
+    // Date range inputs
+    const since = core.getInput("since") || "";
+    const until = core.getInput("until") || "";
+
     // Retrieve template inputs
     const repoTemplate = core.getInput("repo_template") || "- {REPO}\n{ITEMS}";
     const itemTemplate =
@@ -50,6 +54,8 @@ export const getInputParameter = (): InputParameter => {
       includedRepos,
       excludedRepos,
       states,
+      since,
+      until,
       repoTemplate,
       itemTemplate,
       outputFilePath,
@@ -63,6 +69,8 @@ export const getInputParameter = (): InputParameter => {
       includedRepos: [],
       excludedRepos: [],
       states: [],
+      since: "",
+      until: "",
       repoTemplate: "",
       itemTemplate: "",
       outputFilePath: "",

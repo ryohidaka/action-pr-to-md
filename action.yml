@@ -17,6 +17,12 @@ inputs:
   states:
     description: "Comma-separated list of PR states (open, merged, closed)"
     default: ""
+  since:
+    description: "Filters data after to the specified date. (ex.`2020-01-01`)"
+    default: ""
+  until:
+    description: "Filters data prior to the specified date. (ex.`2020-01-01`)"
+    default: ""
   repo_template:
     description: "Template for repository section"
     default: '- {REPO}\\n{ITEMS}'

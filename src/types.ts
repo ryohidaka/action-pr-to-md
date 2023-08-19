@@ -4,6 +4,8 @@ export type InputParameter = {
   includedRepos: string[];
   excludedRepos: string[];
   states: string[];
+  since: string;
+  until: string;
   repoTemplate: string;
   itemTemplate: string;
   outputFilePath: string;
