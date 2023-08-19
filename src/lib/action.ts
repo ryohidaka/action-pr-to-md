@@ -22,18 +22,20 @@ export const getInputParameter = (): InputParameter => {
     // List of included repository names
     const includedReposRaw = core.getInput("included_repos") || "";
     const includedRepos = includedReposRaw
-      .split(",")
-      .map((item) => item.trim());
+      ? includedReposRaw.split(",").map((item) => item.trim())
+      : [];
 
     // List of excluded repository names
     const excludedReposRaw = core.getInput("excluded_repos") || "";
     const excludedRepos = excludedReposRaw
-      .split(",")
-      .map((item) => item.trim());
+      ? excludedReposRaw.split(",").map((item) => item.trim())
+      : [];
 
     // list of PR states
     const statesRaw = core.getInput("states") || "";
-    const states = statesRaw.split(",").map((item) => item.trim());
+    const states = statesRaw
+      ? statesRaw.split(",").map((item) => item.trim())
+      : [];
 
     // Date range inputs
     const since = core.getInput("since") || "";
