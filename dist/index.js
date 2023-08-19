@@ -16561,22 +16561,33 @@ const fs_1 = __importDefault(__nccwpck_require__(7147));
 const getInputParameter = () => {
     try {
         // Retrieve user input parameters
+        // The username to fetch pull requests
         const userName = core.getInput("user_name", { required: true });
+        // Exclude repositories owned by the user
         const isExcludeOwnerRepos = core.getBooleanInput("is_exclude_owner_repos") || false;
+        // List of included repository names
+        const includedReposRaw = core.getInput("included_repos") || "";
+        const includedRepos = includedReposRaw
+            .split(",")
+            .map((item) => item.trim());
+        // List of excluded repository names
         const excludedReposRaw = core.getInput("excluded_repos") || "";
         const excludedRepos = excludedReposRaw
             .split(",")
             .map((item) => item.trim());
+        // list of PR states
         const statesRaw = core.getInput("states") || "";
         const states = statesRaw.split(",").map((item) => item.trim());
         // Retrieve template inputs
         const repoTemplate = core.getInput("repo_template") || "- {REPO}\n{ITEMS}";
-        const itemTemplate = core.getInput("item_template") || "\t- {title} {number} {url}";
+        const itemTemplate = core.getInput("item_template") || "\t- [#{number} {title}]({url})";
+        // Path to the output markdown file
         const outputFilePath = core.getInput("output_file_path") || "output.md";
         // Return the retrieved input parameters
         return {
             userName,
             isExcludeOwnerRepos,
+            includedRepos,
             excludedRepos,
             states,
             repoTemplate,
@@ -16590,6 +16601,7 @@ const getInputParameter = () => {
         return {
             userName: "",
             isExcludeOwnerRepos: false,
+            includedRepos: [],
             excludedRepos: [],
             states: [],
             repoTemplate: "",
@@ -16845,6 +16857,7 @@ exports.getPrsQuery = void 0;
 const getPrsQuery = (options) => {
     const userName = options.userName;
     const isExcludeOwnerRepos = options.isExcludeOwnerRepos;
+    const includedRepos = options.includedRepos;
     const excludedRepos = options.excludedRepos;
     const states = options.states;
     // Initialize the base query with the author's username
@@ -16852,6 +16865,11 @@ const getPrsQuery = (options) => {
     // If excluding owner's repositories, add exclusion
     if (isExcludeOwnerRepos) {
         query += ` -user:${userName}`;
+    }
+    // If included repositories are specified, add their exclusion
+    if (includedRepos && includedRepos.length > 0) {
+        const includedQuery = includedRepos.map((repo) => `repo:${repo}`).join(" ");
+        query += ` ${includedQuery}`;
     }
     // If excluded repositories are specified, add their exclusion
     if (excludedRepos && excludedRepos.length > 0) {
