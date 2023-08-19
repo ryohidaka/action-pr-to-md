@@ -1,6 +1,6 @@
 {
   "name": "action-pr-to-md",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Action to output a list of PRs to a Markdown file.",
   "main": "src/main.ts",
   "scripts": {
