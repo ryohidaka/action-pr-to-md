@@ -11,13 +11,21 @@ import fs from "fs";
 export const getInputParameter = (): InputParameter => {
   try {
     // Retrieve user input parameters
+
+    // The username to fetch pull requests
     const userName = core.getInput("user_name", { required: true });
+
+    // Exclude repositories owned by the user
     const isExcludeOwnerRepos =
       core.getBooleanInput("is_exclude_owner_repos") || false;
+
+    // List of excluded repository names
     const excludedReposRaw = core.getInput("excluded_repos") || "";
     const excludedRepos = excludedReposRaw
       .split(",")
       .map((item) => item.trim());
+
+    // list of PR states
     const statesRaw = core.getInput("states") || "";
     const states = statesRaw.split(",").map((item) => item.trim());
 
@@ -26,6 +34,7 @@ export const getInputParameter = (): InputParameter => {
     const itemTemplate =
       core.getInput("item_template") || "\t- [#{number} {title}]({url})";
 
+    // Path to the output markdown file
     const outputFilePath = core.getInput("output_file_path") || "output.md";
 
     // Return the retrieved input parameters
