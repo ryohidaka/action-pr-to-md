@@ -1,0 +1,10 @@
+name: "Action Template"
+description: ""
+author: "ryohidaka"
+inputs:
+runs:
+  using: "node16"
+  main: "dist/index.js"
+branding:
+  icon: "file-text"
+  color: "green"
